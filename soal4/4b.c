@@ -1,44 +1,38 @@
- 
-#include<stdio.h> 
-#include<stdlib.h> 
-#include<string.h> 
-#include<pthread.h>
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <math.h>
 #include<sys/ipc.h>
 #include<sys/shm.h>
-#include<unistd.h>
 
-void *fak(int num){
-    int i; 
-    unsigned long long fact = 1;
+int penjumlahan[20];
+int p;
 
-    for (i = 1; i <= num; ++i) {
-        fact *= i;
+void fak(void *arg){
+    int i, jumlah=0, j, array;
+    for(i=0; i<20; i++){
+        array = *(p+i); 
+        for(j=0; j<=p; j++){
+            jumlah=jumlah+j;
+        }
+        penjumlahan[i]=jumlah;
     }
-    printf("%llu ", fact);
-
-    pthread_exit(0);
 }
 
-int main() {
-    int n, i, num, count = 0;
-    pthread_t tid[20];
-
+int main(){
     key_t key = 1234;
-    int *p;
-    int shmid = shmget(key, sizeof(int), IPC_CREAT | 0666);
-    p = shmat(shmid, 0, 0);
-    int arr[20];
+    int shmid = shmget(key, 20*sizeof(int), IPC_EXCL);
+    p = (int*)shmat(shmid, 0, 0);
 
-    for(int j=0; j<20; j++){
-        int *num = malloc(sizeof(*num));
-        *num = p[i];
-        pthread_create(&tid[count], NULL, fak, num);
-        count++;
-        sleep(1);
-    }
+    pthread_t tid;
+
+    pthread_create(&tid, NULL, &fak, NULL);
+    pthread_join(tid, NULL);
 
     for(int i=0; i<20; i++){
-        pthread_join(tid[i],NULL);
+        printf("%d", penjumlahan[i]);
     }
 
     shmdt((void*) p);
