@@ -138,20 +138,18 @@ void* MatchRead(void* args){
     char HR[100];
     while (health > 0){
         valread = read( sock , HR, 1024);
-        if(strcmp(HR, "End Game, You LOSE") == 0)
-        {
-        printf("%s\n", HR);
-        pthread_cancel(tempThread);
-        send(sock , HR , strlen(HR) , 0 ); // send biar ga stuck
-        break;
+        if(strcmp(HR, "End Game, You LOSE") == 0){
+            printf("%s\n", HR);
+            pthread_cancel(tempThread);
+            send(sock , HR , strlen(HR) , 0 ); // send biar ga stuck
+            break;
         }
-        else if (strcmp(HR, "End Game, You WIN") == 0)
-        {
-        printf("%s\n", HR);
-        pthread_cancel(tempThread);
-        break;
+        else if (strcmp(HR, "End Game, You WIN") == 0){
+            printf("%s\n", HR);
+            pthread_cancel(tempThread);
+            break;
         }
-        health -= 10;
+        health = health - 10;
         printf("%d\n", health);
     }
 }
