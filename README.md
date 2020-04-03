@@ -11,8 +11,10 @@ Source Code :
 - [soal2-client.c](https://github.com/daffaaflah6/SoalShiftSISOP20_modul3_C11/blob/master/soal2/soal2-client.c)
 - [soal2-server.c](https://github.com/daffaaflah6/SoalShiftSISOP20_modul3_C11/blob/master/soal2/soal2-server.c)
 
+Dalam soal ini, diminta untuk membuat program dalam c untuk game tap-tap berbasis console dengan menggunakan Socket dan Thread.
+
 # 3. Program Mengkategorikan File
-SOurce Code : [soal3.c](https://github.com/daffaaflah6/SoalShiftSISOP20_modul3_C11/blob/master/soal3/3.c)
+Source Code : [soal3.c](https://github.com/daffaaflah6/SoalShiftSISOP20_modul3_C11/blob/master/soal3/3.c)
 
 # 4. Teka Teki Norland
 Source Code :
